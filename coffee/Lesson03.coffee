@@ -12,9 +12,9 @@ class Lesson03 extends App
 		]		
 		
 		triGeometry = new THREE.Geometry()
-		triGeometry.vertices.push(new THREE.Vertex(new THREE.Vector3(0,10,0)))
-		triGeometry.vertices.push(new THREE.Vertex(new THREE.Vector3(-10,-10,0)))
-		triGeometry.vertices.push(new THREE.Vertex(new THREE.Vector3(10,-10,0)))
+		triGeometry.vertices.push(new THREE.Vector3(0,10,0))
+		triGeometry.vertices.push(new THREE.Vector3(-10,-10,0))
+		triGeometry.vertices.push(new THREE.Vector3(10,-10,0))
 		
 		triGeometry.faces.push(new THREE.Face3(0,1,2))
 

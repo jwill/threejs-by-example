@@ -24,7 +24,7 @@ class App
 	makeGeometry: (verts, faces) ->
 		g = new THREE.Geometry()
 		for v in verts
-			g.vertices.push(new THREE.Vertex(new THREE.Vector3(v[0],v[1],v[2])))
+			g.vertices.push(new THREE.Vector3(v[0],v[1],v[2]))
 		for f in faces
 			g.faces.push(new THREE.Face3(f[0],f[1],f[2]))
 			
