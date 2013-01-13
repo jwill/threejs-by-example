@@ -16,7 +16,8 @@ class App
 		@camera.position.z = 100
 		
 		@scene = new THREE.Scene()
-		
+    
+		$('#container').empty()
 		$("#container").get(0).appendChild(@renderer.domElement)
 		
 		@scene.add(@camera)
@@ -33,9 +34,12 @@ class App
 
 	render: () ->
 		@renderer.render(@scene, @camera)
-		
+
+	started: () ->
+    @started = true
+
 window.App = App
 	
 window.animate = () ->
-	requestAnimationFrame(window.animate)
+  requestAnimationFrame(window.animate)
 	window.app.render()
