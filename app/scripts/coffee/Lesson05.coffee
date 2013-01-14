@@ -61,8 +61,6 @@ class Lesson05 extends App
 
 		
 window.Lesson05 = Lesson05
-window.app = new Lesson05()
-window.animate()
 
 
 

@@ -35,5 +35,3 @@ class Lesson02 extends App
 		@scene.add (@square)
 
 window.Lesson02 = Lesson02
-window.app = new Lesson02()
-window.animate()

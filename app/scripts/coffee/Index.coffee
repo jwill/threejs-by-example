@@ -22,9 +22,11 @@ class Index
         window.app = new Lesson05()
       when 'Lesson 06'
         window.app = new Lesson06()
+      when 'Lesson 13'
+        window.app = new Lesson13()
 
 
-    animate() if app.rAF is undefined
+    window.animate()
     
 
 new Index()
