@@ -48,8 +48,4 @@
 
   window.Lesson05 = Lesson05;
 
-  window.app = new Lesson05();
-
-  window.animate();
-
 }).call(this);

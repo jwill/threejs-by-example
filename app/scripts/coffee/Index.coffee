@@ -7,26 +7,41 @@ class Index
       self.handleEvent evt.target.textContent
 
     )
+    @initCodeEditor()
+
+  initCodeEditor: () ->
+    @editor = ace.edit "editor"
+    @editor.setTheme "ace/theme/chrome"
+    @editor.getSession().setMode "ace/mode/coffee"
 
   handleEvent: (text) ->
+    self = this
+    text = text.replace(' ', '')
     switch text
-      when 'Lesson 01'
-        console.log 'This does nothing'
-      when 'Lesson 02'
+      when 'Lesson01'
+        window.app = new App()
+      when 'Lesson02'
         window.app = new Lesson02()
-      when 'Lesson 03'
+      when 'Lesson03'
         window.app = new Lesson03()
-      when 'Lesson 04'
+      when 'Lesson04'
         window.app = new Lesson04()
-      when 'Lesson 05'
+      when 'Lesson05'
         window.app = new Lesson05()
-      when 'Lesson 06'
+      when 'Lesson06'
         window.app = new Lesson06()
-      when 'Lesson 13'
+      when 'Lesson13'
         window.app = new Lesson13()
 
-
+    text = "App" if text is "Lesson01"
+    uri = "scripts/coffee/#{text}.coffee"
+    
+    $.get(uri, (response) -> 
+      self.editor.setValue response.trim()
+    )
     window.animate()
     
 
-new Index()
+index = new Index()
+index.handleEvent "Lesson01"  # Init with the code from the base app
+index.editor.clearSelection()

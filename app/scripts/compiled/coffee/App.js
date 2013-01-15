@@ -53,9 +53,6 @@
   window.App = App;
 
   window.animate = function() {
-    if (window.app.started === void 0) {
-      window.app.started();
-    }
     requestAnimationFrame(window.animate);
     return window.app.render();
   };

@@ -47,8 +47,4 @@
 
   window.Lesson03 = Lesson03;
 
-  window.app = new Lesson03();
-
-  window.animate();
-
 }).call(this);

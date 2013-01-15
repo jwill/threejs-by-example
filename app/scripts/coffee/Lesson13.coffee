@@ -25,7 +25,7 @@ class Lesson13 extends App
     @text.computeBoundingBox()
 
     @textMesh = new THREE.Mesh(@text, material)
-    @textMesh.position.x = -50
+    @textMesh.position.x = -250
     @textMesh.position.z = -500
     #console.log @text
 

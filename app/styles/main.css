@@ -1,1 +1,10 @@
 /* Will be compiled down to a single stylesheet with your sass files */
+
+
+#container {
+  float: left;
+}
+#editor { 
+  position: relative;
+  height: 700px;
+}
