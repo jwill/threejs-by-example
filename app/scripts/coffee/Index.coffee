@@ -32,6 +32,8 @@ class Index
         window.app = new Lesson06()
       when 'Lesson13'
         window.app = new Lesson13()
+      when 'Lesson14'
+        window.app = new Lesson14()
 
     text = "App" if text is "Lesson01"
     uri = "scripts/coffee/#{text}.coffee"

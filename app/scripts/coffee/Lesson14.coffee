@@ -1,4 +1,4 @@
-class Lesson13 extends App
+class Lesson14 extends App
   constructor: () ->
     super()
     light = new THREE.DirectionalLight(0xFFFFFF)
@@ -14,10 +14,13 @@ class Lesson13 extends App
     @renderer.render(@scene, @camera)
 
   drawScene: () ->  
-    material = new THREE.MeshPhongMaterial({color:0xFFF})
+    material = new THREE.MeshPhongMaterial({color:0xFF0000})
         
     @text = new THREE.TextGeometry("3D Text", {
       curveSegments: 8
+      bevelEnabled: true
+      bevelSize: 8
+      bevelThickness: 10
       size: 100
       font: "helvetiker"
     })
@@ -30,4 +33,4 @@ class Lesson13 extends App
     @scene.add @textMesh
     return
 
-window.Lesson13 = Lesson13
+window.Lesson14 = Lesson14

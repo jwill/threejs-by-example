@@ -43,6 +43,9 @@
           break;
         case 'Lesson13':
           window.app = new Lesson13();
+          break;
+        case 'Lesson14':
+          window.app = new Lesson14();
       }
       if (text === "Lesson01") {
         text = "App";
