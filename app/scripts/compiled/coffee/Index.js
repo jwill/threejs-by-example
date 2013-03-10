@@ -46,6 +46,12 @@
           break;
         case 'Lesson14':
           window.app = new Lesson14();
+          break;
+        case 'LoadScene':
+          window.app = new LoadScene();
+          break;
+        case 'Physics':
+          window.app = new Physics();
       }
       if (text === "Lesson01") {
         text = "App";

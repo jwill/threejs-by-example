@@ -5,7 +5,7 @@ class LoadScene extends App
     loader = new THREE.SceneLoader()
     loader.callbackProgress = @callbackProgress
 
-    loader.load( "scripts/scenes/falling-ball2.js", self.callbackFinished)
+    loader.load( "scripts/scenes/falling-ball.js", self.callbackFinished)
     
   # Receives updates from loader
   callbackProgress: (progress, result) ->

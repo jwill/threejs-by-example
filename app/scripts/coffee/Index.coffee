@@ -36,6 +36,8 @@ class Index
         window.app = new Lesson14()
       when 'LoadScene'
         window.app = new LoadScene()
+      when 'Physics'
+        window.app = new Physics()
 
     text = "App" if text is "Lesson01"
     uri = "scripts/coffee/#{text}.coffee"
