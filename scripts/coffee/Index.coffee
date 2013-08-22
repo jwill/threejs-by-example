@@ -38,6 +38,8 @@ class Index
         window.app = new LoadScene()
       when 'Physics'
         window.app = new Physics()
+      when 'ShaderWithUniform'
+        window.app = new ShaderWithUniform()
 
     text = "App" if text is "Lesson01"
     uri = "scripts/coffee/#{text}.coffee"
