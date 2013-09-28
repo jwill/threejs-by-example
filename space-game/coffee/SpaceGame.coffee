@@ -137,7 +137,8 @@ class SpaceGame extends App
       @hero.position.x -= 25
 
   decrement: (direction) ->
-    if direction is 'z'
+    # prevent hero ship from going through floor
+    if direction is 'z' and @hero.position.y > 25  
       @hero.position.y -= 25
     if direction is 'x'
       @hero.rotation.y = 5
