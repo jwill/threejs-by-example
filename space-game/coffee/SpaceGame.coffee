@@ -120,6 +120,7 @@ class SpaceGame extends App
 
   handleInput: (direction) ->
     if direction is 'up'
+      console.log("up")
       @increment('z')
     else if direction is 'down'
       @decrement('z')
@@ -146,18 +147,20 @@ class SpaceGame extends App
 
   setupKeys: () ->
     self = this
-    @k.down('w', () ->
+    @k.down(['w', 'up'], () ->
       self.handleInput('up'))
-    @k.up('w', () -> self.currentVelocity = 0)
-    @k.down('s', () ->
+    @k.up(['w','up'], () -> self.currentVelocity = 0)
+
+    @k.down(['s', 'down'], () ->
       self.handleInput('down'))
-    @k.up('s', () -> self.currentVelocity = 0)
-    @k.down('left', () ->
+    @k.up(['s','down'], () -> self.currentVelocity = 0)
+
+    @k.down(['a','left'], () ->
       self.handleInput('left'))
-    @k.up('left', () -> self.hero.rotation.y = 0)
-    @k.down('right', () ->
+    @k.up(['a','left'], () -> self.hero.rotation.y = 0)
+    @k.down(['d','right'], () ->
       self.handleInput('right'))
-    @k.up('right', () -> self.hero.rotation.y = 0)
+    @k.up(['d','right'], () -> self.hero.rotation.y = 0)
     @k.down('space', () -> self.shootBullet())
     @k.down('p', () -> 
       self.toggleCamera())
