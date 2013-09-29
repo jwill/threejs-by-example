@@ -24,12 +24,10 @@ class SpaceGame extends App
   loadModels: () ->
     @models = {}
     loader = new THREE.JSONLoader()
-    #for i in [1..12]
     loader.load('/models/projectile.js', @projectileCallback)
     loader.load('/models/hero.js', @heroCallback)
     loader.load('/models/enemy.js', @enemyCallback)
     loader.load('/models/gate.js', @gateCallback)
-    #loader.load('/public/assets/urban_road/level2.js', @handleRoadGeom, '/public/assets/urban_road')
 
   projectileCallback : (g, m) ->
     obj = new THREE.Mesh(g, new THREE.MeshFaceMaterial(m))
@@ -103,11 +101,22 @@ class SpaceGame extends App
         @scene.remove(enemy)
     for b in @bullets
       b.position.z -= 5
-      # check for collision:
+      # TODO check for collision:
+      if (b.position.z < -700)
+        @removeBullet(b)
     for g in @gates
       g.position.z += 5
       if g.position.z > @hero.position.z + 400
         @scene.remove(g)
+
+
+  removeBullet: (b) ->
+    # remove from scene
+    @scene.remove(b)
+    # remove from bullets collection
+    index = @bullets.indexOf(b)
+    if (index is not -1)
+      @bullets.splice(index, 1)
 
   drawScene: () ->
     @planeMesh = new THREE.Mesh(new THREE.CubeGeometry(100,1,100), new THREE.MeshBasicMaterial({color: 0x085A14}), 0)
