@@ -2,7 +2,6 @@ class GateFactory
   instance = null
   class PrivateGateFactory
     constructor: () ->
-      @clock = new THREE.Clock()
       @gapSize = 200
       @interval = 3
       @lastGate = 0
@@ -15,7 +14,6 @@ class GateFactory
       obj = new THREE.Mesh(g, new THREE.MeshFaceMaterial(m))
       obj.scale.set(10,12,10)
       self.gate = obj
-      self.clock.start()
 
     placeGates: () ->
         @lastGate -= @interval
@@ -33,14 +31,22 @@ class GateFactory
         @gates.push(a)
         @gates.push(b)
 
-    updateGates: () ->
-      @lastGate += @clock.getDelta()
+    updateGates: (delta) ->
+      @lastGate += delta
       if @lastGate >= @interval
         @placeGates()
       for g in @gates
         g.position.z += 1
         if g.position.z > app.hero.model.position.z + 400
           app.scene.remove(g)
+
+    removeGates: (g) ->
+      # remove from scene
+      app.scene.remove(g)
+      # remove from gates collection
+      index = @gates.indexOf(e)
+      if (index is not -1)
+        @gates.splice(index, 1)
 
   @getInstance: () ->
     instance ?= new PrivateGateFactory()

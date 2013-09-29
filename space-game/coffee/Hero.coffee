@@ -27,4 +27,7 @@ class Hero
       @model.rotation.y = 5
       @model.position.x += 25
 
+  setYRotation: (angle) ->
+    @model.rotation.y = 0
+
 window.Hero = Hero
