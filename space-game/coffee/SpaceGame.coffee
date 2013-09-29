@@ -24,26 +24,11 @@ class SpaceGame extends App
   loadModels: () ->
     @models = {}
     loader = new THREE.JSONLoader()
+    @hero = new Hero()
     @bulletFactory = BulletFactory.getInstance()
-    loader.load('/models/hero.js', @heroCallback)
     loader.load('/models/enemy.js', @enemyCallback)
     loader.load('/models/gate.js', @gateCallback)
 
-  projectileCallback : (g, m) ->
-    obj = new THREE.Mesh(g, new THREE.MeshFaceMaterial(m))
-    obj.scale.set(5,5,5)
-    obj.rotation.x = -1.57
-    app.models['projectile'] = obj
-
-  heroCallback: (g, m) ->
-    obj = new THREE.Mesh(g, new THREE.MeshFaceMaterial(m))
-    obj.rotation.x = -1.57
-    obj.position.y = 100
-    obj.scale.set(6,6,6)
-    app.hero = obj
-    app.scene.add(app.hero)
-    
-    app.models['hero'] = obj 
   gateCallback: (g, m) ->
     self = this
     obj = new THREE.Mesh(g, new THREE.MeshFaceMaterial(m))
@@ -89,11 +74,11 @@ class SpaceGame extends App
       @placeEnemy()
     for enemy in @enemies
       enemy.position.z += 5
-      if enemy.position.z > @hero.position.z + 400
+      if enemy.position.z > @hero.model.position.z + 400
         @scene.remove(enemy)
     for g in @gates
       g.position.z += 5
-      if g.position.z > @hero.position.z + 400
+      if g.position.z > @hero.model.position.z + 400
         @scene.remove(g)
     @bulletFactory.updateBullets()
 
@@ -111,29 +96,13 @@ class SpaceGame extends App
 
   handleInput: (direction) ->
     if direction is 'up'
-      console.log("up")
-      @increment('z')
+      @hero.increment('z')
     else if direction is 'down'
-      @decrement('z')
+      @hero.decrement('z')
     else if direction is 'left'
-      @increment('x')
+      @hero.increment('x')
     else if direction is 'right'
-      @decrement('x')
-
-  increment: (direction) ->
-    if direction is 'z'
-      @hero.position.y += 25
-    if direction is 'x'
-      @hero.rotation.y = -5
-      @hero.position.x -= 25
-
-  decrement: (direction) ->
-    # prevent hero ship from going through floor
-    if direction is 'z' and @hero.position.y > 25  
-      @hero.position.y -= 25
-    if direction is 'x'
-      @hero.rotation.y = 5
-      @hero.position.x += 25
+      @hero.decrement('x')
 
 
 
@@ -141,18 +110,18 @@ class SpaceGame extends App
     self = this
     @k.down(['w', 'up'], () ->
       self.handleInput('up'))
-    @k.up(['w','up'], () -> self.currentVelocity = 0)
+    @k.up(['w','up'], () -> )
 
     @k.down(['s', 'down'], () ->
       self.handleInput('down'))
-    @k.up(['s','down'], () -> self.currentVelocity = 0)
+    @k.up(['s','down'], () -> )
 
     @k.down(['a','left'], () ->
       self.handleInput('left'))
-    @k.up(['a','left'], () -> self.hero.rotation.y = 0)
+    @k.up(['a','left'], () -> self.hero.model.rotation.y = 0)
     @k.down(['d','right'], () ->
       self.handleInput('right'))
-    @k.up(['d','right'], () -> self.hero.rotation.y = 0)
+    @k.up(['d','right'], () -> self.hero.model.rotation.y = 0)
     @k.down('space', () -> self.bulletFactory.shootBullet())
 
   render: () ->

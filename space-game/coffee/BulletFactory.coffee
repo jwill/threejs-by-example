@@ -17,7 +17,7 @@ class BulletFactory
 
     shootBullet: () ->
       bullet = @bullet.clone()
-      pos = app.hero.position.clone()
+      pos = app.hero.model.position.clone()
       pos.z -= 70
       bullet.position.set(pos.x, pos.y, pos.z)
       app.scene.add(bullet)
