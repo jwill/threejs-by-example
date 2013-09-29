@@ -13,7 +13,7 @@ class Lesson13 extends App
   render: () ->
     @renderer.render(@scene, @camera)
 
-  drawScene: () ->  
+  drawScene: () ->
     material = new THREE.MeshPhongMaterial({color:0xFFF})
         
     @text = new THREE.TextGeometry("3D Text", {

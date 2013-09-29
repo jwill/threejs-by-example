@@ -13,7 +13,7 @@ class Lesson13 extends App
   render: () ->
     @renderer.render(@scene, @camera)
 
-  drawScene: () ->  
+  drawScene: () ->
     material = new THREE.MeshBasicMaterial( { color: 0x00FFFF } )
     
     @text = new THREE.Mesh(

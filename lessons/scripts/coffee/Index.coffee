@@ -1,6 +1,6 @@
 # Only for stuff in index.html
 
-class Index 
+class Index
   constructor: () ->
     self = this
     $('.btn').on('click', (evt) ->
@@ -44,7 +44,7 @@ class Index
     text = "App" if text is "Lesson01"
     uri = "scripts/coffee/#{text}.coffee"
     
-    $.get(uri, (response) -> 
+    $.get(uri, (response) ->
       self.editor.setValue response.trim()
     )
     window.animate()

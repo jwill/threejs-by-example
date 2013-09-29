@@ -1,6 +1,6 @@
 class LoadScene extends App
   constructor: () ->
-    super()    
+    super()
     self = this
     loader = new THREE.SceneLoader()
     loader.callbackProgress = @callbackProgress

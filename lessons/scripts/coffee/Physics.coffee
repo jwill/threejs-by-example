@@ -1,6 +1,6 @@
 class Physics extends App
   constructor: () ->
-    super()    
+    super()
     self = this
     loader = new THREE.SceneLoader()
     loader.callbackProgress = @callbackProgress
@@ -26,7 +26,7 @@ class Physics extends App
         rawMesh.material,
         friction,
         res
-      ) 
+      )
     else material = rawMesh.material
     obj = new meshType(rawMesh.geometry, material, mass)
     obj.scale.set rawMesh.scale.x, rawMesh.scale.y, rawMesh.scale.z

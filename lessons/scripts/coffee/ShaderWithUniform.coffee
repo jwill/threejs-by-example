@@ -1,20 +1,20 @@
 class ShaderWithUniform extends App
-	constructor: () ->
+  constructor: () ->
     super()
     @clock = new THREE.Clock()
     light = new THREE.DirectionalLight(0xFFFFFF)
-		
+    
     light.position.x = 10
     light.position.y = 200
     light.position.z = 130
-		
+    
     @scene.add(light)
     @drawScene()
 
-	createShaders: () ->
+  createShaders: () ->
     vShader = """
       void main(void) {
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+         gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
       }
     """
     pShader = """
@@ -38,31 +38,31 @@ class ShaderWithUniform extends App
       fragmentShader: pShader
     })
 
-	drawScene: () ->
-		pyGeometry = @makeGeometry(
-			[
-				[0, 10, 0]
-				[-10, -10, 10]
-				[10, -10, 10]
-				[10, -10, -10]
-				[-10,-10,-10]
-			], [[0,1,2],[0,2,3],[0,3,4], [0,4,1]]
-		)
+  drawScene: () ->
+    pyGeometry = @makeGeometry(
+      [
+        [0, 10, 0]
+        [-10, -10, 10]
+        [10, -10, 10]
+        [10, -10, -10]
+        [-10,-10,-10]
+      ], [[0,1,2],[0,2,3],[0,3,4], [0,4,1]]
+    )
 
 
-		@createShaders()
-		
-		@pyramid = new THREE.Mesh(pyGeometry, @shaderMaterial)
-		
-		@scene.add(@pyramid)
+    @createShaders()
+    
+    @pyramid = new THREE.Mesh(pyGeometry, @shaderMaterial)
+    
+    @scene.add(@pyramid)
 
-	render: () -> 
+  render: () ->
     delta = 5 * @clock.getDelta()
     @uniforms.time.value += 0.2 * delta
     @pyramid.rotation.y += 0.1 * delta
     super()
 
-		
+    
 window.ShaderWithUniform = ShaderWithUniform
 
 
