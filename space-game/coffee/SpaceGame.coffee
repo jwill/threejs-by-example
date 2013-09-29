@@ -25,7 +25,11 @@ class SpaceGame extends App
     @enemyFactory.updateEnemies(delta)
 
   drawScene: () ->
-    @planeMesh = new THREE.Mesh(new THREE.CubeGeometry(100,1,100), new THREE.MeshBasicMaterial({color: 0x085A14}), 0)
+    @planeMesh = new THREE.Mesh(
+      new THREE.CubeGeometry(100,1,100),
+      new THREE.MeshBasicMaterial({color: 0x085A14}),
+      0
+    )
     @planeMesh.scale.set(20,0.01,20)
     @planeMesh.position.set(0,0,0)
     @scene.add(@planeMesh)
