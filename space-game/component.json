@@ -1,0 +1,8 @@
+{
+  "name": "brunch-bower-site",
+  "version": "0.0.1",
+  "main": [],
+  "dependencies": {
+    "console-polyfill": "*"
+  }
+}

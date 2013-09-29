@@ -28,9 +28,11 @@ class App
     @scene = new THREE.Scene()
     @scene.add(@light)
 
-    $('#playingArea').get(0).style.display = 'block'
-    $('#board').empty()
-    $("#board").get(0).appendChild(@renderer.domElement)
+    document.querySelector('#playingArea').style.display = 'block'
+    elem = document.querySelector('#board')
+    for child in elem.children
+      elem.removeChild(child)
+    elem.appendChild(@renderer.domElement)
     
     @scene.add(@camera)
     @currentCamera = @camera
