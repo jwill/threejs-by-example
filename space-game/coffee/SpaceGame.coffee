@@ -24,7 +24,7 @@ class SpaceGame extends App
   loadModels: () ->
     @models = {}
     loader = new THREE.JSONLoader()
-    loader.load('/models/projectile.js', @projectileCallback)
+    @bulletFactory = BulletFactory.getInstance()
     loader.load('/models/hero.js', @heroCallback)
     loader.load('/models/enemy.js', @enemyCallback)
     loader.load('/models/gate.js', @gateCallback)
@@ -34,14 +34,6 @@ class SpaceGame extends App
     obj.scale.set(5,5,5)
     obj.rotation.x = -1.57
     app.models['projectile'] = obj
-
-  shootBullet: () ->
-    bullet = app.models['projectile'].clone()
-    pos = @hero.position.clone()
-    pos.z -= 70
-    bullet.position.set(pos.x, pos.y, pos.z)
-    @scene.add(bullet)
-    @bullets.push(bullet)
 
   heroCallback: (g, m) ->
     obj = new THREE.Mesh(g, new THREE.MeshFaceMaterial(m))
@@ -99,24 +91,14 @@ class SpaceGame extends App
       enemy.position.z += 5
       if enemy.position.z > @hero.position.z + 400
         @scene.remove(enemy)
-    for b in @bullets
-      b.position.z -= 5
-      # TODO check for collision:
-      if (b.position.z < -700)
-        @removeBullet(b)
     for g in @gates
       g.position.z += 5
       if g.position.z > @hero.position.z + 400
         @scene.remove(g)
+    @bulletFactory.updateBullets()
 
 
-  removeBullet: (b) ->
-    # remove from scene
-    @scene.remove(b)
-    # remove from bullets collection
-    index = @bullets.indexOf(b)
-    if (index is not -1)
-      @bullets.splice(index, 1)
+
 
   drawScene: () ->
     @planeMesh = new THREE.Mesh(new THREE.CubeGeometry(100,1,100), new THREE.MeshBasicMaterial({color: 0x085A14}), 0)
@@ -171,15 +153,8 @@ class SpaceGame extends App
     @k.down(['d','right'], () ->
       self.handleInput('right'))
     @k.up(['d','right'], () -> self.hero.rotation.y = 0)
-    @k.down('space', () -> self.shootBullet())
-    @k.down('p', () -> 
-      self.toggleCamera())
+    @k.down('space', () -> self.bulletFactory.shootBullet())
 
-  toggleCamera: () ->
-    if @currentCamera is @camera
-      @currentCamera = @carCamera
-    else @currentCamera = @camera
-  
   render: () ->
     @updateObjects()
     @renderer.render(@scene, @currentCamera)
