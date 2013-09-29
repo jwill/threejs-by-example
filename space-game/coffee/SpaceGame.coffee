@@ -7,12 +7,7 @@ class SpaceGame extends App
     #@drawScene()
 
   init: () ->
-    @gates = []
-    @bullets = []
     @enemies = []
-    @gapSize = 200
-    # several second delay for gates
-    @lastGate = new Date().getTime() + 3000
     @lastEnemy = new Date().getTime() + 5000
 
     loader = new THREE.JSONLoader()
@@ -26,14 +21,8 @@ class SpaceGame extends App
     loader = new THREE.JSONLoader()
     @hero = new Hero()
     @bulletFactory = BulletFactory.getInstance()
+    @gateFactory = GateFactory.getInstance()
     loader.load('/models/enemy.js', @enemyCallback)
-    loader.load('/models/gate.js', @gateCallback)
-
-  gateCallback: (g, m) ->
-    self = this
-    obj = new THREE.Mesh(g, new THREE.MeshFaceMaterial(m))
-    obj.scale.set(10,12,10)
-    app.models['gate'] = obj
 
   enemyCallback: (g, m) ->
     obj = new THREE.Mesh(g, new THREE.MeshFaceMaterial(m))
@@ -51,36 +40,15 @@ class SpaceGame extends App
     @scene.add(a)
     @enemies.push(a)
 
-  placeGates: () ->
-    @lastGate = new Date().getTime()
-    x = (Math.random() * 800)-400
-    y = 50 #(Math.random() * 280)
-    z = -1000
-    
-    a = app.models['gate'].clone()
-    b = a.clone()
-    a.position.set(x, y, z)
-    b.position.set(x+@gapSize, y, z)
-
-    @scene.add(a)
-    @scene.add(b)
-    @gates.push(a)
-    @gates.push(b)
-
   updateObjects: () ->
-    if new Date().getTime() - @lastGate >= 2000
-      @placeGates()
     if new Date().getTime() - @lastEnemy >= 2750
       @placeEnemy()
     for enemy in @enemies
       enemy.position.z += 5
       if enemy.position.z > @hero.model.position.z + 400
         @scene.remove(enemy)
-    for g in @gates
-      g.position.z += 5
-      if g.position.z > @hero.model.position.z + 400
-        @scene.remove(g)
     @bulletFactory.updateBullets()
+    @gateFactory.updateGates()
 
 
 
@@ -119,14 +87,17 @@ class SpaceGame extends App
     @k.down(['a','left'], () ->
       self.handleInput('left'))
     @k.up(['a','left'], () -> self.hero.model.rotation.y = 0)
+
     @k.down(['d','right'], () ->
       self.handleInput('right'))
     @k.up(['d','right'], () -> self.hero.model.rotation.y = 0)
+
     @k.down('space', () -> self.bulletFactory.shootBullet())
 
   render: () ->
     @updateObjects()
     @renderer.render(@scene, @currentCamera)
+
 window.SpaceGame = SpaceGame
 # remove later
 window.app = new SpaceGame()
