@@ -47,7 +47,7 @@ class BulletFactory
         @bullets.splice(index, 1)
 
     checkCollisions: (b) ->
-      directions = [new THREE.Vector3(0, 0, 1),
+      directions = [
                     new THREE.Vector3(0, 0, -1)]
       enemies = app.enemyFactory.enemies
       if (enemies.length > 0)
@@ -55,11 +55,10 @@ class BulletFactory
           @ray.set( b.position.clone(), d )
           collResults = @ray.intersectObjects( enemies, true )
           if ( collResults.length > 0 && collResults[0].distance < 75)
-            console.log(" Hit ")
-            # do stuff
-            # increment score
+            obj = collResults[0].object
+            obj.hit = true
             @removeBullet(b)
-            app.enemyFactory.removeEnemy(collResults[0].object)
+            app.enemyFactory.removeEnemy(obj)
 
   @getInstance: () ->
     instance ?= new PrivateBulletFactory()

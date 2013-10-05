@@ -19,14 +19,15 @@ class EnemyFactory
 
     placeEnemy: () ->
       @lastEnemy -= @interval
-      #x = (Math.random() * 800)-400
-      x = 200
+      x = (Math.random() * 200)
       y = 50 #(Math.random() * 280)
       z = -1000
 
       a = @enemy.clone()
       a.name = "enemy"
       a.position.set(x,y,z)
+      a.hit = false
+      a.handledHit = false
       a.geometry.computeBoundingBox()
       app.scene.add(a)
       @enemies.push(a)
@@ -41,6 +42,9 @@ class EnemyFactory
           @removeEnemy(enemy)
 
     removeEnemy: (e) ->
+      if (e.hit is true and e.handledHit is false)
+        app.score += 50
+        e.handledHit = true
       # remove from scene
       app.scene.remove(e)
       # remove from enemies collection

@@ -25,7 +25,7 @@ class Hero
 
   decrement: (direction) ->
     # prevent hero ship from going through floor
-    if direction is 'z' and @model.position.y > 25
+    if direction is 'z' and @model.position.y > 0
       @model.position.y -= 25
     if direction is 'x'
       @model.rotation.y = 5

@@ -5,6 +5,7 @@ class SpaceGame extends App
     @camera.position.z = 500
     @init()
     #@drawScene()
+    @score = 0
 
   init: () ->
     @loadModels()
