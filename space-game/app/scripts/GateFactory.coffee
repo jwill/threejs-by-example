@@ -23,6 +23,8 @@ class GateFactory
 
       a = @gate.clone()
       b = a.clone()
+      a.name = "gate"
+      b.name = "gate"
       a.position.set(x, y, z)
       b.position.set(x+@gapSize, y, z)
 

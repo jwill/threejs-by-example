@@ -21,7 +21,7 @@ class SpaceGame extends App
   updateObjects: () ->
     delta = @clock.getDelta()
     @bulletFactory.updateBullets()
-    @gateFactory.updateGates(delta)
+    #@gateFactory.updateGates(delta)
     @enemyFactory.updateEnemies(delta)
 
   drawScene: () ->

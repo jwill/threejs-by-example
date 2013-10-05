@@ -14,29 +14,15 @@ class EnemyFactory
       obj.scale.set(10,12,10)
       self.enemy = obj
 
-    placeGates: () ->
-      @lastGate -= @interval
-      x = (Math.random() * 800)-400
-      y = 50 #(Math.random() * 280)
-      z = -1000
-
-      a = @gate.clone()
-      b = a.clone()
-      a.position.set(x, y, z)
-      b.position.set(x+@gapSize, y, z)
-
-      app.scene.add(a)
-      app.scene.add(b)
-      @gates.push(a)
-      @gates.push(b)
-
     placeEnemy: () ->
       @lastEnemy -= @interval
-      x = (Math.random() * 800)-400
+      #x = (Math.random() * 800)-400
+      x = 200
       y = 50 #(Math.random() * 280)
       z = -1000
 
       a = @enemy.clone()
+      a.name = "enemy"
       a.position.set(x,y,z)
       a.geometry.computeBoundingBox()
       app.scene.add(a)
@@ -49,6 +35,7 @@ class EnemyFactory
       for enemy in @enemies
         enemy.position.z += 2
         if enemy.position.z > app.hero.model.position.z + 400
+          console.log("removing enemy")
           @removeEnemy(enemy)
 
     removeEnemy: (e) ->
