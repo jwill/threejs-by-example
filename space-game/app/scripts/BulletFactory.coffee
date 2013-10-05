@@ -54,8 +54,12 @@ class BulletFactory
         for d in directions
           @ray.set( b.position.clone(), d )
           collResults = @ray.intersectObjects( enemies, true )
-          if ( collResults.length > 0 && collResults[0].distance < 500)
+          if ( collResults.length > 0 && collResults[0].distance < 75)
             console.log(" Hit ")
+            # do stuff
+            # increment score
+            @removeBullet(b)
+            app.enemyFactory.removeEnemy(collResults[0].object)
 
   @getInstance: () ->
     instance ?= new PrivateBulletFactory()

@@ -13,6 +13,8 @@ class App
     @light.position.x = 10
     @light.position.y = 200
     @light.position.z = 130
+
+    @hemiLight = new THREE.HemisphereLight(0x000000,0x085A14)
     
     @k = new Kibo()
     @yAxis = new THREE.Vector3(0,1,0)
@@ -27,6 +29,7 @@ class App
     
     @scene = new THREE.Scene()
     @scene.add(@light)
+    @scene.add(@hemiLight)
 
     document.querySelector('#playingArea').style.display = 'block'
     elem = document.querySelector('#board')

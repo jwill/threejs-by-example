@@ -11,6 +11,9 @@ class EnemyFactory
     enemyCallback: (g, m) ->
       self = app.enemyFactory
       obj = new THREE.Mesh(g, new THREE.MeshFaceMaterial(m))
+      obj.material = new THREE.MeshPhongMaterial({
+        ambient:0x969E9C, shininess:50
+      })
       obj.scale.set(10,12,10)
       self.enemy = obj
 
@@ -35,7 +38,6 @@ class EnemyFactory
       for enemy in @enemies
         enemy.position.z += 2
         if enemy.position.z > app.hero.model.position.z + 400
-          console.log("removing enemy")
           @removeEnemy(enemy)
 
     removeEnemy: (e) ->
