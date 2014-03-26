@@ -1,2 +1,4 @@
+/lessons/public/**
+/lessons/node_modules/**
 /space-game/public/**
 /space-game/node_modules/**
